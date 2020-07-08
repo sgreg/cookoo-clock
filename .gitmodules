@@ -1,0 +1,6 @@
+[submodule "firmware/libraries/tiny-i2c"]
+	path = firmware/libraries/tiny-i2c
+	url = https://github.com/technoblogy/tiny-i2c.git
+[submodule "firmware/libraries/Tiny4kOLED"]
+	path = firmware/libraries/Tiny4kOLED
+	url = https://github.com/datacute/Tiny4kOLED.git

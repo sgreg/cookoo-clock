@@ -1,0 +1,10 @@
+128x64 resolution with 4 digits plus colon
+24px width gives 120px, plus 4px on each side buffer -> 24x48 sounds good
+
+Roboto Condensed Bold 52 --> 24x48 font (minus the little single pixel hook at 0, 6, 9)
+    -> rotate 90deg counter-clockwise, then flip vertically
+    -> split up into 6 chunks of 8x24 resulting in 8x144px XBM as font data
+
+For 8x16 font:
+Roboto Condensed Bold 17  (manually adjusted 1)
+

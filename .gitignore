@@ -1,0 +1,4 @@
+**/*.swp
+firmware/*.elf
+firmware/*.hex
+hardware/**/*-bak
