@@ -50,6 +50,35 @@ To make it even simpler, just run `make init` from
 [cookoo-clock/firmware/]$ make init
 ```
 
+### Using ZIP file instead of Git
+
+Note that when downloading the repository as .zip file, the git submodules' code won't be included in the archive, and compiling without them will fail. As the extracted .zip file is not set up as actual git repository, the build system won't be able to fix this via `make init`, and the libraries need to be downloaded manually.
+
+To add the libraries' code to the cook'oo clock repository, follow their link in the [`firmware/libraries/`](firmware/libraries) directory, download the project's .zip file as well, and copy the content in `firmware/libraries/`.
+
+Keep in mind that these are links to the repository at a specific commit, and downloading the .zip file will add the commit hash to the directory name, so make sure you rename the directory accordingly / replace the existing (empty) one with it.
+
+Assuming all .zip files are downloaded in `/tmp/`, here's how that could look like. First, extract them all:
+```
+[/tmp/]$ unzip cookoo-clock-master.zip
+[/tmp/]$ unzip /tmp/Tiny4kOLED-da4a2006816b5208bc94e0ab7f35bfb5fe0e5b8d.zip
+[/tmp/]$ unzip /tmp/tiny-i2c-1029f6fca7c297eb887b601e3b0e352f71e60d1c.zip
+```
+Rename directory so it matches the rest of this README (.zip file contains also branch names) and enter the `libraries` directory:
+```
+[/tmp/]$ mv cookoo-clock-master cookoo-clock
+[/tmp/]$ cd cookoo-clock/firmware/libraries/
+```
+Remove existing (empty) directories and move the downloaded ones in their place:
+```
+[/tmp/cookoo-clock/firmware/libraries/]$ rmdir Tiny4kOLED tiny-i2c
+[/tmp/cookoo-clock/firmware/libraries/]$ mv /tmp/Tiny4kOLED-da4a2006816b5208bc94e0ab7f35bfb5fe0e5b8d Tiny4kOLED
+[/tmp/cookoo-clock/firmware/libraries/]$ mv /tmp/tiny-i2c-1029f6fca7c297eb887b601e3b0e352f71e60d1c tiny-i2c
+```
+
+Now everything should be set up here as well, and the code can be compiled.
+
+
 ## Build
 
 You'll need the AVR GCC toolchain to build the firmware, which can be installed in Ubuntu / Debian via
