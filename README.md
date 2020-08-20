@@ -110,6 +110,16 @@ Alternatively, there is a pre-built `clock.elf` binary and `clock.hex` file [ava
 
 The `Makefile` is written for USBasp programmers, but adjusting for any other programmer won't be a big deal. Check for the `AVRDUDE_FLAGS` variable and change the `-c` parameter accordingly - and depending on the programmer itself, add other required parameters (like `-P`) along the way.
 
+### Using Arduino As Programmer
+If you don't have a programmer at all, but a spare Arduino, you should be able to use that as programmer. There's some [general information on the Arduino website](https://www.arduino.cc/en/Tutorial/ArduinoISP) about that, but what worked for me was to upload the built-in ["Arduino ISP" example sketch](https://www.arduino.cc/en/Tutorial/BuiltInExamples#arduinoisp) and connect the ISP connector to the Arduino's VCC, GND, MISO, MOSI, SCK pins, and the ISP's reset pin to digital out 10 (or adjust the example accordingly). After adjusting the `Makefile` to
+
+```
+AVRDUDE_FLAGS = -p $(TARGET_CONTROLLER) -c arduino -P /dev/ttyACM0
+```
+things worked just as with any programmer. Note that the USB port might vary in your setup, depending on your operating system and Arduino board (in my case, Pro Micro clone on Linux).
+
+### Get Flashing
+
 To verify the programmer and target microcontroller is set up properly and recognized, run `make check-programmer` from within the `firmware` directory, and check for `SUCCESS` (or `FAILURE`) output at the end.
 
 ```
@@ -127,7 +137,9 @@ If all is well, proceed to flash the firmware from within the `firmware/` direct
 [cookoo-clock/firmware/]$  make program
 ```
 
-If you flash the firmware for the very first time, make sure you also burn the ATtiny85's fuses:
+### Don't Forget The Fuses
+
+If you flash the firmware for the very first time, make sure you also burn the ATtiny85's fuses so the clock source is set up properly:
 
 ```
 [cookoo-clock/firmware/]$  make fuses
