@@ -106,6 +106,8 @@ Once installed, just run `make` in the `firmware/` directory:
 
 Alternatively, there is a pre-built `clock.elf` binary and `clock.hex` file [available in the releases](https://github.com/sgreg/cookoo-clock/releases) that can be flashed straight away, and won't require to set up the AVR GCC tool chain and build it all from scratch.
 
+If you only want to flash the firmware, the `clock.hex` file is all you'll need, the `clock.elf` file is just there for completeness.
+
 ## Flash And Burn
 
 The `Makefile` is written for USBasp programmers, but adjusting for any other programmer won't be a big deal. Check for the `AVRDUDE_FLAGS` variable and change the `-c` parameter accordingly - and depending on the programmer itself, add other required parameters (like `-P`) along the way.
@@ -136,6 +138,8 @@ If all is well, proceed to flash the firmware from within the `firmware/` direct
 ```
 [cookoo-clock/firmware/]$  make program
 ```
+
+**Note:** if you downloaded the [pre-built files from the release](#pre-built-elf-and-hex-files), make sure you copy the `clock.hex` file in the `firmware/` directory before running `make program` (or adjust the Makefile).
 
 ### Don't Forget The Fuses
 
