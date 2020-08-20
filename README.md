@@ -149,6 +149,24 @@ If you flash the firmware for the very first time, make sure you also burn the A
 [cookoo-clock/firmware/]$  make fuses
 ```
 
+### No Make?
+
+In case you don't have `make`, you can do all this directly with `avrdude` instead.
+Instead of `make program`, run:
+```
+$ avrdude -p attiny85 -c usbasp -U flash:w:clock.hex
+```
+And instead of `make fuses`, run:
+```
+avrdude -p attiny85 -c usbasp -U lfuse:w:0x7d:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m
+```
+
+Check some [fuse calculator](https://www.engbedded.com/fusecalc/) to get an idea what's happening with those fuse settings if you're curious.
+
+Again, if you use a different programmer than USBasp, adjust the `-c` command line parameter again the same way as you would with the `AVRDUDE_FLAGS` mentioned above (and if needed, add the `-P <port>` along the way).
+
+And if you don't have `avrdude` ..then you're unfortunately on your own.
+
 ## Using The Clock
 
 There's really not much to do here. Once the clock's magnets get short circuited (in a good way) on a conductive surface, the clock starts up and gets the counting going. There is only one button as user interface, which restarts the clock and displays the last counted time on the bottom. That's all there is, really.
